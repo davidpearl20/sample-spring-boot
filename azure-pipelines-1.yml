@@ -18,6 +18,14 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'cognizant_lab_sonarCloud'
+    organization: 'davidpearl20'
+    scannerMode: 'Other'
+
+- task: SonarCloudAnalyze@1
+
 - task: Docker@2
   inputs:
     containerRegistry: 'cognizant_lab_docker_hub'
