@@ -29,11 +29,11 @@ steps:
     gradleWrapperFile: 'gradlew'
     tasks: 'build'
     publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: 'sample-spring-boot/src/test/java/com/example/springboot/*.java'
     javaHomeOption: 'JDKVersion'
     sonarQubeRunAnalysis: true
     sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '2.6.1'
+    sonarQubeGradlePluginVersion: '3.3'
     spotBugsAnalysis: false
 - task: Docker@2
   inputs:
