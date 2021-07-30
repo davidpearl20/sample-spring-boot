@@ -22,3 +22,9 @@ steps:
   inputs:
     command: 'build'
     Dockerfile: '**/Dockerfile'
+
+- task: Docker@2
+  inputs:
+    repository: 'dajpearl/cognizantlab'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
