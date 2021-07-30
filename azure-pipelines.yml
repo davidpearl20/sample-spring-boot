@@ -3,17 +3,36 @@ stages:
   jobs:
   - job: Compile
     steps:
-    - script: chmod +x gradlew && ./gradlew build jacocoTestReport
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'build'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: true
+        sqGradlePluginVersionChoice: 'specify'
+        sonarQubeGradlePluginVersion: '2.6.1'
+        spotBugsAnalysis: false
 - stage: SonarQube
   jobs:
   - job: Sonarscan
     steps:
-    - script: |
-        echo "Sonarqube Integration"
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'cognizant_lab_sonarCloud'
+        organization: 'davidpearl20'
+        scannerMode: 'Other'
 - stage: DockerBuildPush
   jobs:
   - job: DockerBuildPush
     steps:
-    - script: |
-        echo "Docker Build"
-        echo "Docker Push"
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'cognizant_lab_docker_hub'
+        command: 'login'
+    - task: Docker@2
+      inputs:
+        repository: 'dajpearl/cognizantlab'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
