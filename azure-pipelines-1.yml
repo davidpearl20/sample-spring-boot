@@ -44,3 +44,10 @@ steps:
     repository: 'dajpearl/cognizantlab'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
+- task: KubernetesManifest@0
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'cognizant_aks'
+    namespace: 'david'
+    manifests: './kubernetes.yml'
