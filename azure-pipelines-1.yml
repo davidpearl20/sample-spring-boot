@@ -24,8 +24,17 @@ steps:
     organization: 'davidpearl20'
     scannerMode: 'Other'
 
-- task: SonarCloudAnalyze@1
-
+- task: Gradle@2
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'build'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '2.6.1'
+    spotBugsAnalysis: false
 - task: Docker@2
   inputs:
     containerRegistry: 'cognizant_lab_docker_hub'
