@@ -49,5 +49,5 @@ steps:
   inputs:
     action: 'deploy'
     kubernetesServiceConnection: 'cognizant_aks'
-    namespace: 'default'
+    namespace: 'davidp'
     manifests: './kubernetes.yml'
